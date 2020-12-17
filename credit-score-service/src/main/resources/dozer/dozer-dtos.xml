@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://dozer.sourceforge.net"
+          xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+    <mapping map-id="CreditScoreEntity_CreditScore">
+        <class-a>com.project.credit.score.entity.CreditScoreEntity</class-a>
+        <class-b>com.project.credit.score.base.dto.CreditScore</class-b>
+        <field>
+            <a>crdtScrId</a>
+            <b>creditScoreId</b>
+        </field>
+        <field>
+            <a>custId</a>
+            <b>customerId</b>
+        </field>
+        <field>
+            <a>crdtScrStId</a>
+            <b>creditScoreStatusId</b>
+        </field>
+    </mapping>
+</mappings>

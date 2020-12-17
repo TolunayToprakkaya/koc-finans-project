@@ -1,0 +1,18 @@
+#Server Port
+server:
+  port: 9092
+
+#Service Name for Eureka Server
+spring:
+  application:
+    name: CREDIT-SCORE-SERVICE
+
+#Eureka Server
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost

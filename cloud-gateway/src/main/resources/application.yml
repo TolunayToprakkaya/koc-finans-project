@@ -1,0 +1,64 @@
+#Server Port
+server:
+  port: 9191
+
+#Service Name for Eureka Server And Return Information Message
+spring:
+  application:
+    name: API-GATEWAY
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+      routes:
+        - id: CUSTOMER-SERVICE
+          uri: lb://CUSTOMER-SERVICE
+          predicates:
+            - Path=/customer/**
+          filters:
+            - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+            - name: CircuitBreaker
+              args:
+                name: CUSTOMER-SERVICE
+                fallbackuri: forward:/customerServiceFallBack
+        - id: CREDIT-SCORE-SERVICE
+          uri: lb://CREDIT-SCORE-SERVICE
+          predicates:
+            - Path=/creditScore/**
+          filters:
+            - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+            - name: CircuitBreaker
+              args:
+                name: CREDIT-SCORE-SERVICE
+                fallbackuri: forward:/creditScoreServiceFallBack
+
+#If Service Gonna Crash, Return Information Messages in 4 seconds
+hystrix:
+  command:
+    fallbackcmd:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 4000
+
+#Hystrix Dashboard
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
+
+#Eureka Server
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
