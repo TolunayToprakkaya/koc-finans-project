@@ -1,5 +1,5 @@
 # koc-finans-project
-Projemiz aşağıdakiler bileşenleri içermektedir.<br>
+Projemiz aşağıdaki bileşenleri içermektedir.<br>
 - Discovery Server (Spring Eureka) 
 - Config Server (Spring Cloud Config) 
 - API Gateway
